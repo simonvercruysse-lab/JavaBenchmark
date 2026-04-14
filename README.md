@@ -10,3 +10,4 @@ The current latest release is v1.2. Note that all the releases that are availabl
 Running Benchmark Itself:
 * runBenchmark.sh - run the Benchmark Web Application (accessible via local machine only)
 * runRemoteAccessibleBenchmark.sh - like the above but allows port 8443 to be accessible outside the machine Benchmark is running on.
+# JavaBenchmark

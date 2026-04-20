@@ -1,0 +1,20 @@
+name: Aikido Security Gate
+on: [push]
+
+jobs:
+  aikido-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install -g @aikidosec/ci-api-client
+      - run: |
+          aikido-api-client scan-release \
+            "${{ github.repository }}" \
+            "${{ github.sha }}" \
+            --apikey "${{ secrets.AIKIDO_API_KEY }}" \
+            --fail-on-sast-scan \
+            --fail-on-iac-scan \
+            --fail-on-secrets-scan

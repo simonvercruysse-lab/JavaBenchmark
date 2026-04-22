@@ -9,6 +9,7 @@ public class VulnerabilityTest {
 
     public void unsafeDatabaseQuery(String userInput) {
         try {
+            // test retrigger
             Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/db", "admin", DB_PASSWORD);
             
             Statement statement = conn.createStatement();

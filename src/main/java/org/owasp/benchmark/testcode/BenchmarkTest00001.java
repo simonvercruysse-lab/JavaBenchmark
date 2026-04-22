@@ -51,7 +51,7 @@ public class BenchmarkTest00001 extends HttpServlet {
             throws ServletException, IOException {
         // some code
         response.setContentType("text/html;charset=UTF-8");
-
+        // String apiKey = "PRgatetestkey"
         javax.servlet.http.Cookie[] theCookies = request.getCookies();
 
         String param = "noCookieValueSupplied";

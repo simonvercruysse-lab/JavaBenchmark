@@ -613,6 +613,16 @@
             <version>8.0.1</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>2.14.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>2.14.1</version>
+        </dependency>
 
         <!-- jaxb dependencies removed from Java 11+ -->
         <dependency>
@@ -1269,6 +1279,6 @@
         <tomcat.major.version>9</tomcat.major.version>
         <version.tomcat>9.0.115</version.tomcat>
         <tomcat.url>https://archive.apache.org/dist/tomcat/tomcat-${tomcat.major.version}/v${version.tomcat}/bin/apache-tomcat-${version.tomcat}.zip</tomcat.url>
-        <org-dom4j.dom4j.version>1.6.1</org-dom4j.dom4j.version>
+        <org-dom4j.dom4j.version>2.0.0</org-dom4j.dom4j.version>
     </properties>
 </project>

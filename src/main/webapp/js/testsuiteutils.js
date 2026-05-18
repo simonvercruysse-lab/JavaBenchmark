@@ -2,13 +2,13 @@
 
 $(document).ready(function() {
     // Add listeners for Jersey Ajax w/XML forms (and possibly others)
-    if (!!document.getElementById("login-btn")) {
+    if (document.getElementById("login-btn")) {
         document.getElementById("login-btn").addEventListener('click', dispatchToSubmit);
     }
-    if (!!document.getElementById("login-btn-atk")) {
+    if (document.getElementById("login-btn-atk")) {
         document.getElementById("login-btn-atk").addEventListener('click', dispatchToSubmit);
     }
-    if (!!document.getElementById("cGenerator")) {
+    if (document.getElementById("cGenerator")) {
         document.getElementById("cGenerator").addEventListener('click', setCookie);
     }
 });

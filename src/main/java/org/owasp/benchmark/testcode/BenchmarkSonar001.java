@@ -5,7 +5,7 @@ import java.sql.Statement;
 
 public class VulnerabilityDemo {
 
-    private static final String DB_PASSWORD = "super_secret_password_12345!";
+    private static final String DB_PASSWORD = "super_secret_password_123456!";
 
     public void unsafeDatabaseQuery(String userInput) {
         try {

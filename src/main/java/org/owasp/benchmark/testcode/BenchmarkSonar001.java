@@ -3,7 +3,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-public class VulnerabilityTest {
+public class VulnerabilityDemo {
 
     private static final String DB_PASSWORD = "super_secret_password_12345!";
 

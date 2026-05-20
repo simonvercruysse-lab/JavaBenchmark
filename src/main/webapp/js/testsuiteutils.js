@@ -47,7 +47,7 @@ function setCookie(event) {
     const cvalue = document.getElementById(testcase + 'A').value;
 
     const formVar = "#Form" + testcase;
-    var URL = $(formVar).attr("action");
+    const URL = $(formVar).attr("action");
 
     Cookies.set(testcase, cvalue, {
         path: URL, version: 1, secure: true
@@ -55,7 +55,7 @@ function setCookie(event) {
 }
 
 function escapeRegExp(str) {
-    return str.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1");
+    return str.replace(/([.*+?^=!:${}()|[\]/\\])/g, "\\$1");
 }
 
 function replaceAll(str, find, replace) {
@@ -205,7 +205,7 @@ function getXMLMsgValues(xmlResponse) {
     $.fn.serializeFormJSON = function () {
 
         var o = {};
-        var a = this.serializeArray();
+        const a = this.serializeArray();
         $.each(a, function () {
             if (o[this.name]) {
                 if (!o[this.name].push) {
@@ -223,8 +223,8 @@ function getXMLMsgValues(xmlResponse) {
 function submitJSONwAjax(testcase) {
 
     const formVar = "#Form" + testcase;    
-    var dataF = $(formVar).serializeFormJSON();
-    var URL = $(formVar).attr("action");
+    const dataF = $(formVar).serializeFormJSON();
+    const URL = $(formVar).attr("action");
 
     $.ajax({
       type: "POST",

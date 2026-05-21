@@ -65,9 +65,9 @@ function replaceAll(str, find, replace) {
 function submitHeaderForm(testcase) {
     const formVar = "#Form" + testcase;
     const suffix = "-Unsafe";
-    var rawtestcase = testcase;
+    let rawtestcase = testcase;
     if (testcase.endsWith(suffix)) rawtestcase = testcase.substring(0, testcase.length - suffix.length);
-    var formData = $(formVar).serialize();
+    const formData = $(formVar).serialize();
     var URL = $(formVar).attr("action");
     var text = $(formVar + " input[id=" + rawtestcase + "]").val();
 
@@ -223,8 +223,8 @@ function getXMLMsgValues(xmlResponse) {
 function submitJSONwAjax(testcase) {
 
     const formVar = "#Form" + testcase;    
-    var dataF = $(formVar).serializeFormJSON();
-    var URL = $(formVar).attr("action");
+    const dataF = $(formVar).serializeFormJSON();
+    const URL = $(formVar).attr("action");
 
     $.ajax({
       type: "POST",
@@ -240,10 +240,10 @@ function submitJSONwAjax(testcase) {
 };
 
 function getJsonMsgValues(jsonResponse) {
-    var result = "";
+    let result = "";
     JSON.parse(jsonResponse).forEach(function (msg) {
         const prefix = '{"msg":"';
-        var msgString = JSON.stringify(msg); // e.g., {"msg":"Here is the standard output of the command:"}
+        let msgString = JSON.stringify(msg); // e.g., {"msg":"Here is the standard output of the command:"}
         // FIXME: This is a hack. There has to be a better/more native way in JavaScript
         msgString = msgString.substring(prefix.length, msgString.length - 2).replaceAll("\\n", "\n");
         result += msgString + "\n";

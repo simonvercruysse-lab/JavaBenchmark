@@ -2,8 +2,7 @@ name: SonarQube Cloud Analysis
 
 on:
   push:
-    branches:
-      - main
+    branches: [main, master]
   pull_request:
     types: [opened, synchronize, reopened]
 
@@ -16,9 +15,25 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0 
+          fetch-depth: 0
 
-      - name: Set up JDK 17
+      - name: Set up JDK 8 (build)
+        uses: actions/setup-java@v4
+        with:
+          java-version: '8'
+          distribution: 'temurin'
+
+      - name: Cache Maven
+        uses: actions/cache@v4
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
+
+      - name: Compile project
+        run: mvn -B compile -Dspotless.skip=true
+
+      - name: Set up JDK 17 (Sonar scanner)
         uses: actions/setup-java@v4
         with:
           java-version: '17'
@@ -31,21 +46,14 @@ jobs:
           key: ${{ runner.os }}-sonar
           restore-keys: ${{ runner.os }}-sonar
 
-      - name: Cache Maven packages
-        uses: actions/cache@v4
-        with:
-          path: ~/.m2
-          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
-          restore-keys: ${{ runner.os }}-m2
-
-      - name: Build and analyze
+      - name: Sonar analysis
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: >
-          mvn -B verify
-          org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
+          mvn -B org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
           -Dsonar.projectKey=simonvercruysse-lab_JavaBenchmark
           -Dsonar.organization=simonvercruysse-lab
           -Dsonar.host.url=https://sonarcloud.io
-          -DskipTests
+          -Dsonar.java.source=8
+          -Dsonar.java.target=8

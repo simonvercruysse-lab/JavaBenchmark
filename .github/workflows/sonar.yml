@@ -31,6 +31,8 @@ jobs:
           restore-keys: ${{ runner.os }}-m2
 
       - name: Compile project
+        env:
+          MAVEN_OPTS: ""
         run: mvn -B compile -Dspotless.check.skip=true
 
       - name: Set up JDK 17 (Sonar scanner)

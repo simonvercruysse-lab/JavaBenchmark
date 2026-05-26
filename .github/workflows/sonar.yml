@@ -1,53 +1,47 @@
 name: SonarQube Cloud analysis
-
 on:
   push:
     branches: [main, master]
   pull_request:
     types: [opened, synchronize, reopened]
-
+  workflow_dispatch:
 jobs:
   sonar:
     name: Build and analyze
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-
       - name: Set up JDK 8 (build)
         uses: actions/setup-java@v4
         with:
           java-version: '8'
           distribution: 'temurin'
-
+      - name: Set up Maven 3.8.8
+        uses: stCarolas/setup-maven@v5
+        with:
+          maven-version: 3.8.8
       - name: Cache Maven
         uses: actions/cache@v4
         with:
           path: ~/.m2
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
-
       - name: Compile project
-        env:
-          MAVEN_OPTS: ""
-        run: mvn -B compile -Dspotless.check.skip=true
-
+        run: mvn -B compile
       - name: Set up JDK 17 (Sonar scanner)
         uses: actions/setup-java@v4
         with:
           java-version: '17'
           distribution: 'temurin'
-
       - name: Cache SonarQube packages
         uses: actions/cache@v4
         with:
           path: ~/.sonar/cache
           key: ${{ runner.os }}-sonar
           restore-keys: ${{ runner.os }}-sonar
-
       - name: Sonar analysis
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

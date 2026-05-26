@@ -1190,7 +1190,7 @@
                 <executions>
                     <execution>
                         <id>spotless-apply</id>
-                        <phase>compile</phase>
+                        <phase>none</phase>
                         <goals>
                             <goal>apply</goal>
                         </goals>
